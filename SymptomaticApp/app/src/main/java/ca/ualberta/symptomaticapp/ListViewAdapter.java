@@ -1,6 +1,9 @@
+
 package ca.ualberta.symptomaticapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,11 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ca.ualberta.symptomaticapp.AddRecordActivity;
+import ca.ualberta.symptomaticapp.Problem;
+import ca.ualberta.symptomaticapp.R;
+import ca.ualberta.symptomaticapp.ViewFullProblemActivity;
 
 public class ListViewAdapter extends BaseAdapter implements ListAdapter {
     ArrayList<Problem> problemList;
@@ -50,19 +58,38 @@ public class ListViewAdapter extends BaseAdapter implements ListAdapter {
         //Handle buttons
         Button viewFullProblemButton = view.findViewById(R.id.viewFullProblemButton);
         Button addRecordButton = view.findViewById(R.id.addRecordButton);
+        Button editRecordButton = view.findViewById(R.id.editRecordButton);
+
+        editRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditProblemActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
         viewFullProblemButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-
+                Intent intent = new Intent(context, ViewFullProblemActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
         addRecordButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, AddRecordActivity.class);
+
+                context.startActivity(intent);
             }
         });
+
 
         return view;
     }

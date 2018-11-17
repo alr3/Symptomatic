@@ -37,7 +37,7 @@ public class User {
 
     String email = " ",phone = "",username = "",userType = ""; //The contact information of the user, as well as their userType
 
-    public ArrayList<Problem> problems = new ArrayList<>(); //An list of all problems associated to the user
+    private Toast toast;
 
     /**
      * Creates the instance of a user object
@@ -65,7 +65,7 @@ public class User {
         newUser.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                int x = 1;
+                int x=1; //dummy activity
             }
         });
 
@@ -156,14 +156,6 @@ public class User {
     public static boolean validateEmail(String input_email){
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{1,6}$"); //A various number of numbers or letters, followed by an '@' followed by a various number of numbers or letters, followed by a '.' followed by 1 to 6 letters
         return (pattern.matcher(input_email).matches()); //returns whether or not the format matches
-    }
-
-    /**
-     * Gets the problem list of the user
-     * @return The problem list of the user
-     */
-    public ArrayList<Problem> returnProblemList(){
-        return this.problems;
     }
 
 }
